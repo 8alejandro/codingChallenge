@@ -39,14 +39,8 @@ public final class User {
     }
 
     public void resolveBet(ResolvedBet result) {
-        if(result.getWinningBet()){
+        if(result.getWinningBet()) {
             cash = Cash.of(cash.value() + result.getAmount().value());
-        } else {
-            if(cash.value() < result.getAmount().value()) {
-                throw new NotEnoughCashException(cash);
-            } else {
-                cash = Cash.of(cash.value() - result.getAmount().value());
-            }
         }
     }
 

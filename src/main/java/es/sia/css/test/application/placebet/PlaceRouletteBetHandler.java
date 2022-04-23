@@ -26,14 +26,22 @@ public class PlaceRouletteBetHandler {
     }
 
     public void handle(PlaceSingleNumberRouletteBetCommand command) {
-        RouletteBet bet = RouletteNumberBet.of(Cash.of(command.getAmount()), user,
-            RoulettePosition.of(command.getNumber()));
-        placeAndResolveBet(bet);
+        if(user.getCash().value() > command.getAmount()) {
+            RouletteBet bet = RouletteNumberBet.of(Cash.of(command.getAmount()), user,
+                RoulettePosition.of(command.getNumber()));
+            placeAndResolveBet(bet);
+        } else {
+            throw new User.NotEnoughCashException(user.getCash());
+        }
     }
 
     public void handle(PlaceColorRouletteBetCommand command) {
-        RouletteBet bet = RouletteColorBet.of(Cash.of(command.getAmount()), user, command.getColor());
-        placeAndResolveBet(bet);
+        if(user.getCash().value() > command.getAmount()) {
+            RouletteBet bet = RouletteColorBet.of(Cash.of(command.getAmount()), user, command.getColor());
+            placeAndResolveBet(bet);
+        } else {
+            throw new User.NotEnoughCashException(user.getCash());
+        }
     }
 
     private void placeAndResolveBet(RouletteBet bet) {
