@@ -7,7 +7,9 @@ package es.sia.css.test.application.depositcash;
 
 import es.sia.css.test.domain.valueobject.Cash;
 import es.sia.css.test.domain.user.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DepositCashHandler {
 
     private final User user;
