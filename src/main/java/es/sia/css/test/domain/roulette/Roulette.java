@@ -29,7 +29,10 @@ public final class Roulette {
 
     public Optional<ResolvedBet> play() {
         RoulettePosition winningPosition = getRandomPosition();
-        return Optional.of(bet.resolve(winningPosition));
+        if (bet != null) {
+            return Optional.of(bet.resolve(winningPosition));
+        }
+        return Optional.empty();
     }
 
     private RoulettePosition getRandomPosition() {

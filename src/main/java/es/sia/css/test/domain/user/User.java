@@ -42,7 +42,11 @@ public final class User {
         if(result.getWinningBet()){
             cash = Cash.of(cash.value() + result.getAmount().value());
         } else {
-            cash = Cash.of(cash.value() - result.getAmount().value());
+            if(cash.value() < result.getAmount().value()) {
+                throw new NotEnoughCashException(cash);
+            } else {
+                cash = Cash.of(cash.value() - result.getAmount().value());
+            }
         }
     }
 
